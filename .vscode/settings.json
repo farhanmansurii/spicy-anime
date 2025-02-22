@@ -1,0 +1,11 @@
+{
+	"editor.formatOnSave": true,
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"editor.insertSpaces": true,
+	"editor.tabSize": 4,
+	"editor.wordWrap": "off",
+	"stylelint.validate": ["css", "scss", "postcss"],
+	"terminal.integrated.env.windows": {
+		"NODE_OPTIONS": "--max-old-space-size=8192"
+	}
+}
