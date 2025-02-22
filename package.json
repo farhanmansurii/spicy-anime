@@ -67,7 +67,6 @@
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
-        "@tanstack/eslint-plugin-query": "^4.38.0",
         "@types/axios": "^0.9.36",
         "@types/node": "^20",
         "@types/react": "^19",
