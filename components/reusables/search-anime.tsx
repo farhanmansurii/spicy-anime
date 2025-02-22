@@ -98,7 +98,7 @@ export function CommandDialogDemo() {
           <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-3">
             {results?.map((e) => (
               <Link key={e.id} href={`/anime/${e.id}`}>
-                <div className="rounded overflow-hidden group relative aspect-[2/3] ring-2 ring-transparent group-hover:ring-primary bg-muted group-hover:cursor-pointer relative duration-150">
+                <div className="rounded overflow-hidden group relative aspect-[2/3] ring-2 ring-transparent group-hover:ring-primary bg-muted group-hover:cursor-pointer  duration-150">
                   <div className="absolute group-hover:cursor-pointer inset-0 group-hover:bg-black/20 bg-none duration-200"></div>
                   {e.image && (
                     <img

@@ -1,55 +1,32 @@
-"use client";
-import React, { useState } from "react";
-import Player from "@oplayer/react";
-import hls from "@oplayer/hls";
-import ui from "@oplayer/ui";
+import React, { useRef } from "react";
+import ReactHlsPlayer from "react-hls-player";
 
-interface EpisodeRenderProps {
-    sources: { url: string; title: string }[];
+interface Source {
+    url: string;
+    title: string;
+    quality: string;
 }
 
-const plugins = [
-    ui({
-        pictureInPicture: true,
-        screenshot: true,
-        keyboard: { global: true },
-    }),
-    hls(),
-];
+interface EpisodeRenderProps {
+    sources: Source[];
+}
 
 const EpisodeRender: React.FC<EpisodeRenderProps> = ({ sources }) => {
-    const [selectedSource, setSelectedSource] = useState(sources[0]?.url || "");
 
-    const handleSourceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedSource(event.target.value);
-    };
-
-    if (!sources || sources.length === 0) return null;
-
+    const playerRef = useRef<HTMLVideoElement>(null!);
+    if (!sources || sources.length === 0) {
+        return <div>No source available</div>;
+    }
     return (
-        <div className="shadow-md rounded-md overflow-hidden my-4">
-            {sources.length > 1 && (
-                <select
-                    value={selectedSource}
-                    onChange={handleSourceChange}
-            >
-                    {sources.map((source, index) => (
-                        <option key={index} value={source.url}>
-                            {source.title || `Source ${index + 1}`}
-                        </option>
-                    ))}
-                </select>
-            )}
-
-            <Player
-                plugins={plugins}
-                source={{
-                    title: "Oppenheimer",
-                    src: selectedSource,
-                }}
-                onEvent={(e) => console.log(e)}
+        <div className="w-full aspect-video">
+            <ReactHlsPlayer
+                playerRef={playerRef}
+                src={sources[0].url}
+                autoPlay={false}
+                controls={true}
+                width="100%"
+                height="auto"
             />
-
         </div>
     );
 };

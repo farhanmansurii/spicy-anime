@@ -43,5 +43,5 @@ export default function EpisodePlayer() {
         return <div>No streams available.</div>;
     }
 
-    return <EpisodeRender sources={results.sources} />;
+    return <EpisodeRender sources={results.sources}/>;
 }
