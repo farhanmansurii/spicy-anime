@@ -20,19 +20,19 @@ const AnimeRow: React.FC<AnimeRowProps> = ({ title, endpoint }) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    axios
-      .get(endpoint)
-      .then((response) => {
-        console.log(`[log] : anime-row.tsx:26 : response →`, response)
-        // According to the docs, the response should have a 'results' array.
-        setAnimes(response.data.results);
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(endpoint);
+        const data = response.data as { results: Anime[] };
+        setAnimes(data.results);
+      } catch (error) {
         console.error(`Error fetching ${title} anime:`, error);
-      })
-      .finally(() => {
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, [endpoint, title]);
 
   return (
