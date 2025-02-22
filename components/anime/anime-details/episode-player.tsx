@@ -1,5 +1,9 @@
-import React, { useRef } from "react";
-import ReactHlsPlayer from "react-hls-player";
+"use client";
+import React from "react";
+import { MediaPlayer, MediaProvider } from '@vidstack/react';
+import { PlyrLayout, plyrLayoutIcons } from '@vidstack/react/player/layouts/plyr';
+import '@vidstack/react/player/styles/base.css';
+import '@vidstack/react/player/styles/plyr/theme.css';
 
 interface Source {
     url: string;
@@ -12,22 +16,14 @@ interface EpisodeRenderProps {
 }
 
 const EpisodeRender: React.FC<EpisodeRenderProps> = ({ sources }) => {
-
-    const playerRef = useRef<HTMLVideoElement>(null!);
     if (!sources || sources.length === 0) {
         return <div>No source available</div>;
     }
     return (
-        <div className="w-full aspect-video">
-            <ReactHlsPlayer
-                playerRef={playerRef}
-                src={sources[0].url}
-                autoPlay={false}
-                controls={true}
-                width="100%"
-                height="auto"
-            />
-        </div>
+        <MediaPlayer title="Sprite Fight" src={'https://cors.consumet.stream/' + sources[0].url}>
+            <MediaProvider />
+            <PlyrLayout icons={plyrLayoutIcons} />
+        </MediaPlayer>
     );
 };
 

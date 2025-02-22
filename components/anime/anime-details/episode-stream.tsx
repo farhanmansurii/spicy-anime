@@ -4,8 +4,8 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'next/navigation';
 import { getEpisodeStreams } from '@/lib/fetch';
-import EpisodeRender from './episode-player';
-
+import dynamic from 'next/dynamic';
+const EpisodeRender = dynamic(() => import('./episode-player'), { ssr: false });
 export default function EpisodePlayer() {
     const searchParams = useSearchParams();
     const episodeId = searchParams.get('episode');
