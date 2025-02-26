@@ -13,19 +13,30 @@ export interface StreamSource {
     isBackup: boolean;
 }
 
-export interface EpisodeStream {
-  headers: {
-    Referer: string;
-    watchsb: string | null; // only provided when server equals "streamsb"
-    "User-Agent": string | null;
-  };
-  sources: {
-    url: string;
-    quality: string;
-      isM3U8: boolean;
-    title:string
-  }[];
+interface Mark {
+    start: number;
+    end: number;
+    text?: string;
 }
+
+interface Source {
+    url: string;
+    isM3U8: boolean;
+    type: string;
+}
+
+interface Subtitle {
+    url: string;
+    lang: string;
+}
+
+export interface EpisodeStream {
+    intro?: Mark;
+    outro?: Mark;
+    sources: Source[];
+    subtitles?: Subtitle[];
+}
+
 
 
 /**
