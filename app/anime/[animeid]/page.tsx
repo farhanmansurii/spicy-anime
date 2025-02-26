@@ -25,8 +25,9 @@ const PaginatedEpisodes = dynamic(
 
 export type paramsType = Promise<{ animeid: string }>;
 
-export async function generateMetadata({ params }: { params: { animeid: string } }) {
-	const data: AnimeInfo = await getAnimeInfo(params.animeid);
+export async function generateMetadata({ params }: { params: paramsType }) {
+	const { animeid } = await params;
+	const data: AnimeInfo = await getAnimeInfo(animeid);
 
 	return {
 		title: data.title,
@@ -42,14 +43,8 @@ export async function generateMetadata({ params }: { params: { animeid: string }
 					alt: data.title,
 				},
 			],
-			// Optionally specify the type depending on the content (movie, series, etc.)
+
 			type: data.type === 'movie' ? 'video.movie' : 'video.episode',
-		},
-		twitter: {
-			card: 'summary_large_image',
-			title: data.title,
-			description: data.description,
-			images: [data.image],
 		},
 	};
 }
