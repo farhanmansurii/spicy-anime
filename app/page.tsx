@@ -3,10 +3,10 @@ import Container from '@/components/reusables/container';
 import Navbar from '@/components/reusables/navbar';
 
 export default function Home() {
-  return (
-    <Container>
-      <Navbar />
-      <HomePage />
-    </Container>
-  );
+	return (
+		<Container>
+			<Navbar />
+			<HomePage />
+		</Container>
+	);
 }
